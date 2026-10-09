@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 粒子交互手势游戏 - 能量爆发版</title>
+    <title>Hands as Blades</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
@@ -177,16 +177,16 @@
     <div id="loading-screen">
         <div class="mb-6 text-2xl font-black tracking-tight uppercase text-blue-600">Shield System</div>
         <div class="load-indicator"><div id="load-bar"></div></div>
-        <div id="load-status" class="mt-4 text-sm text-gray-400 font-medium">初始化交互界面...</div>
+        <div id="load-status" class="mt-4 text-sm text-gray-400 font-medium">Initializing...</div>
     </div>
 
-    <div id="audio-hint" onclick="initAudio()">点击此处激活音频系统 (BGM)</div>
+    <div id="audio-hint" onclick="initAudio()">Click To Open BGM</div>
     
     <div id="damage-overlay"></div>
 
     <div id="game-over">
-        <h1 class="text-6xl font-black mb-4">游戏结束</h1>
-        <p id="final-score" class="text-2xl mb-8">最终得分: 0</p>
+        <h1 class="text-6xl font-black mb-4">Game Finish</h1>
+        <p id="final-score" class="text-2xl mb-8">Final Score: 0</p>
         <button onclick="resetGame()" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all transform hover:scale-105 pointer-events-auto">重试</button>
     </div>
 
@@ -196,11 +196,11 @@
         <div class="status-panel">
             <div class="bar-wrapper">
                 <div id="health-bar"></div>
-                <div class="bar-label">生命值: <span id="health-val">100</span>%</div>
+                <div class="bar-label">HP: <span id="health-val">100</span>%</div>
             </div>
             <div class="bar-wrapper">
                 <div id="energy-bar"></div>
-                <div class="bar-label">能量爆发: <span id="energy-val">0</span>%</div>
+                <div class="bar-label">Energy Boost: <span id="energy-val">0</span>%</div>
             </div>
         </div>
         
@@ -208,8 +208,8 @@
         <div id="shield-right" class="shield-ring"></div>
         
         <div class="absolute bottom-10 right-10 text-right bg-white/80 p-4 rounded-xl text-xs space-y-1">
-            <div>🔥 <span class="text-orange-600 font-bold">完美格挡</span>：积攒能量</div>
-            <div>⚡ <span class="text-blue-600 font-bold">能量爆发</span>：无敌状态 + 3倍分数</div>
+            <div>🔥 <span class="text-orange-600 font-bold">Perfect Block</span>：Charging Energy</div>
+            <div>⚡ <span class="text-blue-600 font-bold">Energy Boost</span>：Invincible + 3xScore </div>
         </div>
     </div>
 
@@ -240,7 +240,7 @@
                 
                 // 更新UI反馈
                 const hint = document.getElementById('audio-hint');
-                hint.innerText = "音频已就绪！";
+                hint.innerText = "BGM Ready！";
                 hint.classList.add('ready');
                 
                 console.log("音频引擎状态:", audioCtx.state);
@@ -475,7 +475,7 @@
             }
             
             playBlockSound(isOverdrive ? 1.8 : 1);
-            showFeedback(isOverdrive ? "爆发得分! +300" : "完美格挡! +100", screenPos.x, screenPos.y, isOverdrive ? "text-yellow-400 font-black" : "text-green-500");
+            showFeedback(isOverdrive ? "Boost! +300" : "Perfect Block! +100", screenPos.x, screenPos.y, isOverdrive ? "text-yellow-400 font-black" : "text-green-500");
             updateUI();
         }
 
@@ -504,7 +504,7 @@
         function endGame() {
             isGameOver = true;
             gameOverScreen.style.display = 'flex';
-            document.getElementById('final-score').innerText = `最终得分: ${score}`;
+            document.getElementById('final-score').innerText = `Final Score: ${score}`;
         }
 
         function resetGame() {
@@ -599,7 +599,7 @@
                     initScene();
                 }, 500);
             } catch (e) {
-                document.getElementById('load-status').innerText = "摄像头不可用";
+                document.getElementById('load-status').innerText = "Camara not available";
             }
         }
 
